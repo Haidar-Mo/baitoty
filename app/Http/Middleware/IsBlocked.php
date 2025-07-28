@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Notifications\VerificationCodeNotification;
 use Closure;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class MustBeVerifiedEmail
+class IsBlocked
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class MustBeVerifiedEmail
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->email_verified_at == null) {
-
+        if ($request->user()->is_blocked) {
+            return response()->json(['message' => 'Sorry,You are Blocked'], Response::HTTP_FORBIDDEN);
         }
         return $next($request);
     }

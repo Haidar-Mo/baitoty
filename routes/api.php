@@ -25,4 +25,8 @@ Route::prefix('v1/')->group(function () {
         include __DIR__ . "/v1/mobile/payment.php";
 
     });
+
+    Route::prefix("dashboard")->group(function () {
+        include __DIR__ . "/v1/dashboard/user.php";
+    });
 });

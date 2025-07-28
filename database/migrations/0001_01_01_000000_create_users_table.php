@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('device_token')->nullable();
+            $table->boolean('is_blocked')->default(false);
             $table->timestamps();
         });
 

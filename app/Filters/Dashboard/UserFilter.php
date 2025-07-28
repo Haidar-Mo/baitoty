@@ -8,18 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 class UserFilter extends BaseFilter
 {
 
-    public function first_name(Builder $query): Builder
-    {
-        return $query->where('first_name', 'like', '%' . $this->request->first_name . '%');
-    }
-
-    public function is_blocked(Builder $query): Builder
-    {
-        return $query->where('is_blocked', $this->request->is_blocked);
-
-    }
-
-    /*public function apply(Builder $query)
+    public function apply(Builder $query)
     {
 
         // Filter by block status
@@ -27,8 +16,8 @@ class UserFilter extends BaseFilter
             $query->where('is_blocked', $this->request->is_blocked);
         }
         // Filter by name
-        if ($this->request->filled('first_name')) {
-            $query->where('first_name', 'like', '%' . $this->request->first_name . '%');
+        if ($this->request->filled('name')) {
+            $query->where('name', 'like', '%' . $this->request->name . '%');
         }
 
         // Filter by email
@@ -38,7 +27,7 @@ class UserFilter extends BaseFilter
 
         // Filter by role
         if ($this->request->filled('role')) {
-            $query->where('role', $this->request->role);
+            $query->hasRole($this->request->role);
         }
 
         // Filter by created_at date range
@@ -47,5 +36,5 @@ class UserFilter extends BaseFilter
         }
 
         return $query;
-    }*/
+    }
 }

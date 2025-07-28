@@ -29,7 +29,8 @@ class OrderService
      */
     public function getAllOrders(Request $request)
     {
-        $orders = Order::query()->where('kitchen_id', '=', auth()->user()->kitchen()->first()->id);
+        $orders = Order::query()
+        ->where('kitchen_id', '=', auth()->user()->kitchen()->first()->id);
         return $this->filter->apply($orders);
     }
 

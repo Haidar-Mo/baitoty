@@ -15,6 +15,8 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, HasApiTokens, Notifiable, HasRoles, HasPermissions;
 
+    protected $guard_name = 'api';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +27,8 @@ class User extends Authenticatable
         'email',
         'password',
         'email_verified_at',
-        'verification_code'
+        'verification_code',
+        'is_blocked',
     ];
 
     /**
@@ -36,6 +39,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'verification_code',
+        'is_blocked'
     ];
 
     /**

@@ -22,7 +22,9 @@ class OrderController extends Controller
         try {
             $orders = $this->service->getMyOrders($request)
                 ->get()
-                ->append(['kitchen_name']);
+                ->append(['kitchen_name'])
+                ->load('meal');
+
             return $this->showResponse($orders, 'تم عرض كل الطلبات', 200);
         } catch (\Exception $e) {
             return $this->showError($e, 'حدث خطأ ما أثناء عرض الطلبات');
