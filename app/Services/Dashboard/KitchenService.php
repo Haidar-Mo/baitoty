@@ -25,7 +25,10 @@ class KitchenService
 
     public function getKitchen(string $id)
     {
-        return Kitchen::findOrFail($id);
+        $kitchen = Kitchen::with([
+            'meal'
+        ])->findOrFail($id);
+        return $kitchen;
     }
 
 

@@ -28,5 +28,7 @@ Route::prefix('v1/')->group(function () {
 
     Route::prefix("dashboard")->group(function () {
         include __DIR__ . "/v1/dashboard/user.php";
+        include __DIR__ . "/v1/dashboard/kitchen.php";
+        include __DIR__ . "/v1/dashboard/order.php";
     });
 });
