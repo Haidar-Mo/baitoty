@@ -26,7 +26,7 @@ class KitchenCreateRequest extends FormRequest
             'user_id' => ['required', 'exists:users,id', new AssignKitchenRule()],
             'name' => ['required', 'string'],
             'description' => ['nullable', 'string'],
-            'phone_number' => ['required', 'string', 'unique:users,phone_number'],
+            'phone_number' => ['required', 'string', 'unique:kitchens,phone_number'],
             'second_phone_number' => ['nullable', 'string'],
             'latitude' => ['required', 'numeric', 'min:-90', 'max:90'],
             'longitude' => ['required', 'numeric', 'min:-180', 'max:180'],

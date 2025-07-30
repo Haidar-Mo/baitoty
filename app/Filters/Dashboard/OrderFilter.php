@@ -26,7 +26,7 @@ class OrderFilter extends BaseFilter
 
         //: Filter by status
         if ($this->request->filled('status')) {
-            $query->whereHas('status', $this->request->status);
+            $query->where('status', $this->request->status);
         }
 
 

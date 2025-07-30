@@ -30,5 +30,6 @@ Route::prefix('v1/')->group(function () {
         include __DIR__ . "/v1/dashboard/user.php";
         include __DIR__ . "/v1/dashboard/kitchen.php";
         include __DIR__ . "/v1/dashboard/order.php";
+        include __DIR__ . "/v1/dashboard/statistics.php";
     });
 });

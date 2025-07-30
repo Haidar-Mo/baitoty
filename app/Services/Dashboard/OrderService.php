@@ -18,7 +18,7 @@ class OrderService
     public function getAllOrders(Request $request)
     {
         $orders = Order::query();
-        return $this->filter->apply($orders);
+        return $this->filter->apply($orders)->get();
     }
 
     public function getOrder(string $order_id)
@@ -26,7 +26,7 @@ class OrderService
         $order = Order::with([
             'kitchen',
             'user',
-            'meals'
+            'meal'
         ])->find($order_id);
         return $order;
 
