@@ -30,7 +30,7 @@ class OrderService
     public function getAllOrders(Request $request)
     {
         $orders = Order::query()
-        ->where('kitchen_id', '=', auth()->user()->kitchen()->first()->id);
+            ->where('kitchen_id', '=', auth()->user()->kitchen()->first()->id);
         return $this->filter->apply($orders);
     }
 
@@ -95,7 +95,7 @@ class OrderService
             'title' => $notifications[$status]['title'],
             'body' => $notifications[$status]['body']
         ];
-       // $this->unicast($notification_data, $client->device_token);
+        $this->unicast($notification_data, $client->device_token);
         return $order;
     }
 
@@ -124,7 +124,7 @@ class OrderService
             'title' => 'تم تسليم طلبك بنجاح',
             'body' => 'لقد تم توصيل طلبك بنجاح. نتمنى أن يكون الطعام قد نال إعجابك! '
         ];
-      //  $this->unicast($notification_data, $client->device_token);
+        $this->unicast($notification_data, $client->device_token);
         return $order;
     }
 

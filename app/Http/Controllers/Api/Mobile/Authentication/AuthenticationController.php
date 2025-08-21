@@ -23,7 +23,7 @@ class AuthenticationController extends Controller
             'password' => ['required', 'string'],
             'device_token' => ['sometimes']
         ]);
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', operator: $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'البريد أو كلمة المرور غير صحيحة'], 401);

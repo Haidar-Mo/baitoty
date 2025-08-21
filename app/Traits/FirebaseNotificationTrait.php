@@ -48,7 +48,7 @@ trait FirebaseNotificationTrait
             return ['success' => false, 'message' => 'Invalid token'];
         } catch (\Kreait\Firebase\Exception\MessagingException $e) {
             Log::error('Firebase Messaging Error: ' . $e->getMessage());
-            return ['success' => false, 'message' => 'FCM Messaging failed'];
+            return ['success' => false, 'message' => "FCM Messaging failed :{{$e->getMessage()}}"];
         } catch (\Exception $e) {
             Log::error('Unexpected Firebase Error: ' . $e->getMessage());
             return ['success' => false, 'message' => 'Unexpected error'];

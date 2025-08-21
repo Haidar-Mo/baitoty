@@ -27,7 +27,9 @@ class Order extends Model
     ];
 
     protected $appends = [
-        'meal _name',
+        'meal_name',
+        'user_name',
+        'kitchen_name',
         'created_from'
     ];
     public function casts(): array

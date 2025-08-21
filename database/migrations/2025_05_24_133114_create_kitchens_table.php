@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->text('description')->nullable();
             // $table->foreignId('city_id')->constrained('cities')->cascadeOnDelete();
             // $table->string('address');
-            $table->double('latitude')->default(0.0);
-            $table->double('longitude')->default(0.0);
+            $table->double('latitude')->default(33.5132);
+            $table->double('longitude')->default(36.2768);
             $table->string('phone_number');
             $table->string('second_phone_number')->nullable();
             $table->boolean('can_deliver')->default(0);

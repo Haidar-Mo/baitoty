@@ -4,6 +4,9 @@ namespace App\Services\Mobile\Chef;
 
 use App\Enums\MediaPathsEnum;
 use App\Models\Media;
+use App\Models\User;
+use App\Notifications\Mobile\MealNotification;
+use App\Traits\FirebaseNotificationTrait;
 use App\Traits\HasFiles;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
@@ -15,13 +18,13 @@ use Illuminate\Support\Facades\DB;
 class MealService
 {
 
-    use HasFiles;
+    use HasFiles, FirebaseNotificationTrait;
 
     public function create(FormRequest $request)
     {
         $data = $request->validated();
 
-        return DB::transaction(function () use ($data) {
+        $meal = DB::transaction(function () use ($data) {
 
             $meal = auth()->user()->kitchen->meal()->create($data);
             if ($data['attribute']) {
@@ -38,6 +41,23 @@ class MealService
 
             return $meal->load(['attribute', 'media']);
         });
+
+        //:Send Notification To all Clients
+        $clients = User::role('client', 'api')->get();
+        $notifications = [
+            'title' => 'وجبة جديدة متاحة!',
+            'body' => 'خبر رائع! تم إضافة وجبة جديدة من الطباخ، سارع بتجربتها الآن.',
+        ];
+
+
+        $clients->each->notify(new MealNotification(
+            meal: $meal,
+            title: $notifications['title'],
+            body: $notifications['body']
+        ));
+
+        return $meal;
+
     }
 
     public function update(FormRequest $request, string $mealId)

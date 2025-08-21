@@ -27,7 +27,7 @@ class KitchenUpdateRequest extends FormRequest
             'user_id' => ['sometimes', 'exists:users,id', new AssignKitchenRule()],
             'name' => ['sometimes', 'string'],
             'description' => ['nullable', 'string'],
-            'phone_number' => ['sometimes', 'string', 'unique:kitchens,phone_number', Rule::unique('kitchens')->ignore($this->route('phone_number'))],
+            'phone_number' => ['sometimes', 'string', Rule::unique('kitchens', 'phone_number')->ignore($this->route('kitchen_id'))],
             'second_phone_number' => ['nullable', 'string'],
             'latitude' => ['sometimes', 'numeric', 'min:-90', 'max:90'],
             'longitude' => ['sometimes', 'numeric', 'min:-180', 'max:180'],

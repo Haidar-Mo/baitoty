@@ -2,20 +2,20 @@
 
 namespace App\Notifications\Mobile;
 
-use App\Models\Order;
+use App\Models\Meal;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OrderNotification extends Notification
+class MealNotification extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(public Order $order, public string $title, public string $body)
+    public function __construct(public Meal $meal, public string $title, public string $body)
     {
         //
     }
@@ -30,18 +30,17 @@ class OrderNotification extends Notification
         return ['database'];
     }
 
-
     /**
      * Get the array representation of the notification.
      *
      * @return array<string, mixed>
      */
-    public function toDatabase(object $notifiable): array
+    public function toArray(object $notifiable): array
     {
         return [
             'title' => $this->title,
             'body' => $this->body,
-            'model_id' => $this->order->id
+            'model_id' => $this->meal->id
         ];
     }
 }

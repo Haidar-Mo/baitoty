@@ -42,6 +42,10 @@ class User extends Authenticatable
         'is_blocked'
     ];
 
+    protected $appends = [
+        'role_name'
+    ];
+
     /**
      * Get the attributes that should be cast.
      *

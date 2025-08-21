@@ -36,8 +36,13 @@ return [
     ],
     'firebase' => [
         'credentials' => [
-            'file' => storage_path('app/google-services.json'),
+            'file' => storage_path('app/private/firebase_service.json'),
         ],
     ],
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+    ],
+
 
 ];
