@@ -11,6 +11,6 @@ Route::prefix('payments')
     ])
     ->group(function () {
 
-
         Route::post('/create-payment-intent', [StripePaymentController::class, 'createIntent']);
+        Route::post('/stripe/webhook', [StripePaymentController::class, 'handleWebhook']);
     });
