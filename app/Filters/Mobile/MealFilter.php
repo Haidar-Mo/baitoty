@@ -14,7 +14,7 @@ class MealFilter extends BaseFilter
         }
 
         if ($this->request->filled('name')) {
-            $query->where('name', "%" . $this->request->name . "%");
+            $query->where('name', 'like', "%{$this->request->name}%");
         }
 
         if ($this->request->filled('max_price')) {
