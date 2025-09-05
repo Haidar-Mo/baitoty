@@ -60,10 +60,10 @@ class OrderController extends Controller
     }
 
 
-    public function makeDelivered(Request $request, string $id)
+    public function makeDelivered(Request $request)
     {
         try {
-            $order = $this->service->makeDelivered($request, $id);
+            $order = $this->service->makeDelivered($request);
             return $this->showResponse($order);
         } catch (\Exception $e) {
             return $this->showError($e, 'حدث خطأ ما أثناء تعديل حالة الطلب');

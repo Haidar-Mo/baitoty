@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Mobile\Chef;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Mobile\KitchenUpdateRequest;
 use App\Services\Mobile\Chef\ProfileService;
 use App\Traits\ResponseTrait;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -25,5 +25,26 @@ class ProfileController extends Controller
         }
     }
 
+
+/*     public function update(Request $request)
+    {
+        try {
+            $profile = $this->service->update($request);
+            return $this->showResponse($profile);
+        } catch (\Exception $e) {
+            return $this->showError($e);
+        }
+    } */
+
+
+    public function updateKitchen(KitchenUpdateRequest $request)
+    {
+        try {
+            $kitchen = $this->service->editKitchen($request);
+            return $this->showResponse($kitchen);
+        } catch (\Exception $e) {
+            return $this->showError($e);
+        }
+    }
     
 }

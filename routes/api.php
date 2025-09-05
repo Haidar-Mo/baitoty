@@ -27,6 +27,7 @@ Route::prefix('v1/')->group(function () {
         });
 
         include __DIR__ . "/v1/mobile/payment.php";
+        include __DIR__ . "/v1/mobile/compliment.php";
 
         Route::post('send/notification', [TestController::class, 'sendNotification']);
     });

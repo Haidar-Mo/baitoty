@@ -13,5 +13,6 @@ Route::prefix('profile')
     ->group(function () {
 
         Route::get('show', [ProfileController::class, 'show']);
-        
+        Route::post('kitchen/update', [ProfileController::class, 'updateKitchen']);
+
     });

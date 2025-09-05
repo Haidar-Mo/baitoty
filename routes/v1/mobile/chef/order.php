@@ -17,6 +17,6 @@ Route::prefix('orders/')
         Route::get('show/{id}', [OrderController::class, 'show']);
 
         Route::post('update/status/{id}', [OrderController::class, 'update']);
-        Route::post('make-delivered/{id}', [OrderController::class, 'makeDelivered']);
+        Route::post('make-delivered/', [OrderController::class, 'makeDelivered']);
         Route::post('cancel/{id}', [OrderController::class, 'cancel']);
     });

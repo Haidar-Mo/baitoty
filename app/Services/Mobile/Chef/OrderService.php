@@ -22,11 +22,6 @@ class OrderService
     }
 
 
-    /**
-     * Get all orders for the authenticated user's kitchen
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function getAllOrders(Request $request)
     {
         $orders = Order::query()
@@ -34,14 +29,6 @@ class OrderService
         return $this->filter->apply($orders);
     }
 
-
-    /**
-     * Get the order by ID for the authenticated user
-     *
-     * @param int $orderId
-     * @return \Illuminate\Database\Eloquent\Collection|Order
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     public function getOrderById(int $id): \Illuminate\Database\Eloquent\Collection|Order
     {
         $order = auth()->user()
@@ -56,7 +43,7 @@ class OrderService
     public function changeStatus(Request $request, string $id)
     {
         $request->validate([
-            'status' => 'required|string'
+            'status' => 'required|string|in:accepted,ready,delivered,canceled,'
         ]);
         $order = auth()->user()
             ->kitchen()->first()?->order()->findOrFail($id);
@@ -74,13 +61,13 @@ class OrderService
                 'title' => 'تم قبول طلبك!',
                 'body' => 'أخبار رائعة! تم قبول طلبك من قبل الطباخ، وسيبدأ التحضير قريبًا.',
             ],
-            'rejected' => [
+            'canceled' => [
                 'title' => 'تم رفض طلبك',
                 'body' => 'نأسف، لقد تم رفض طلبك من قبل الطباخ. يمكنك تجربة مطبخ آخر أو طبق مختلف.',
             ],
-            'preparing' => [
-                'title' => 'يتم الآن تجهيز طلبك',
-                'body' => 'طلبك قيد التحضير الآن. سنقوم بإعلامك عند الانتهاء!',
+            'ready' => [
+                'title' => 'طلبك جاهز',
+                'body' => 'طلبك جاهز الآن. سنقوم توصيله لك بأقرب وقت!',
             ],
         ];
 
@@ -99,14 +86,16 @@ class OrderService
         return $order;
     }
 
-    public function makeDelivered(Request $request, string $id)
+    public function makeDelivered(Request $request)
     {
         $request->validate([
             'qr_code' => 'required|string'
         ]);
         $order = auth()->user()
-            ->kitchen()->first()?->order()->where('qr_code', '=', $request->qr_code)->first();
-        $order = DB::transaction(function () use ($order, $request) {
+            ->kitchen()->first()?->order()?->where('qr_code', '=', $request->qr_code)->first();
+        if (!$order)
+            throw new \Exception("الطلب المحدد غير موجود", 404);
+        $order = DB::transaction(function () use ($order) {
             $order->update([
                 'status' => 'delivered'
             ]);

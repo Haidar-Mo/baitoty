@@ -31,7 +31,6 @@ class AuthenticationController extends Controller
         if ($request->has('device_token')) {
             $user->update(['device_token' => $request->device_token]);
         }
-        $user->tokens()->delete();
 
         $accessToken = $user->createToken(
             'access_token',

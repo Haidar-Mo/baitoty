@@ -30,10 +30,14 @@ class RegistrationRequest extends FormRequest
 
             'kitchen_name' => 'required_if:role,chef|string',
             'city_id' => 'required_if:role,chef|exists:cities,id',
-            'kitchen_address' => 'required_if:role,chef|string',
             'kitchen_description' => 'required_if:role,chef|string',
             'kitchen_phone_number' => 'required_if:role,chef|string',
-            'kitchen_second_phone_number' => 'nullable',
+            'kitchen_second_phone_number' => 'nullable|string',
+            'open_at' => 'required_if:role,chef|date_format:H:i',
+            'close_at' => 'required_if:role,chef|date_format:H:i',
+            'longitude' => 'required_if:role,chef|numeric',
+            'latitude' => 'required_if:role,chef|numeric',
+            'can_deliver' => 'sometimes|boolean',
         ];
     }
 }

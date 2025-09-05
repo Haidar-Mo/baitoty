@@ -37,9 +37,12 @@ class RegistrationService
                     'city_id' => $data['city_id'],
                     'name' => $data['kitchen_name'],
                     'description' => $data['kitchen_description'],
-                    'address' => $data['kitchen_address'],
                     'phone_number' => $data['kitchen_phone_number'],
                     'second_phone_number' => $data['kitchen_second_phone_number'] ?? null,
+                    'open_at' => $data['open_at'] ?? null,
+                    'close_at' => $data['close_at'] ?? null,
+                    'longitude' => $data['longitude'] ?? null,
+                    'latitude' => $data['latitude'] ?? null,
                     'verification_code' => $data['verification_code'],
 
                 ]);

@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('phone_number');
             $table->double('latitude')->default(0.0);
             $table->double('longitude')->default(0.0);
-            $table->string('notes')->nullable();
+            $table->string('notes')->nullable()->default('لا يوجد');
             $table->string('qr_code')->unique()->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();
